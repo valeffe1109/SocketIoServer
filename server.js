@@ -14,10 +14,14 @@ app.use(express.json())
 
 io.on('connection',(socket,res)=>{
     socket.on('new-operations',function(data){
-        
+
         io.emit('new-remote-operations',data)
     })
     
+})
+
+http.use((req,res,next)=>{
+    res.header('Access-Control-Allow-Origin')
 })
 
 http.listen(port,()=>{
